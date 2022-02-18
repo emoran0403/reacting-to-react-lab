@@ -17,20 +17,3 @@ export const Greeter = (props) => {
         </>
     )
 }
-
-export const Loading = () => {
-
-const [loaded, setLoaded] = useState(false)
-
-    const handleLoaded = () => {
-        return setLoaded(true)
-    }
-
-    return(
-        <>
-            <h1>Website Loading...</h1>
-            <button onClick={handleLoaded()}>I'm Impatient!</button>
-        </>
-    )
-}
-

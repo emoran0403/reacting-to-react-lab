@@ -1,38 +1,52 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Greeter, Loading} from './components/Greeter';
-import { useState } from 'react';
-
+import React from "react";
+import ReactDOM from "react-dom";
+import { Greeter, Loading } from "./components/Greeter";
+import { useState } from "react";
 
 const App = () => {
+  const [username, setUsername] = useState("");
 
-    const [username, setUsername] = useState("");
+  const handleUsername = (e) => {
+    return setUsername(e.target.value);
+  };
 
-    const handleUsername = (e) => {
-        return setUsername(e.target.value)
-    }
-        return ( 
-        <div>
-            <h1>Hello React!</h1> {/**this is always shown */}
-            {loaded ? ( // this displays when loaded=true
-                <>
-                    <Greeter name="Eric" phrase="Hey there" />
-                    <Greeter name="Andrew" phrase="What's up" />
-                    <Greeter name="Ervin Howell" phrase="I can't believe its not" />
-                    
-                </>
-                
-            ) : ( // this displays when loaded=false
-                <Loading />
-            )}
-        </div>);
-    
+  const [loaded, setLoaded] = useState(false);
+
+  const handleLoaded = () => {
+    return setLoaded(!loaded);
+  };
+
+  if (!loaded) {
+    setTimeout(() => {
+      handleLoaded();
+    }, 3000);
+  }
+
+  return (
+    <div>
+      <h1>Hello React!</h1> {/**this is always shown */}
+      {loaded ? ( // this displays when loaded=true
+        <>
+          <Greeter name="Eric" phrase="Hey there" />
+          <Greeter name="Andrew" phrase="What's up" />
+          <Greeter name="Ervin Howell" phrase="I can't believe its not" />
+          <input type="text" onChange={handleUsername} value={username} />
+          <p>Hello {username}</p>
+        </>
+      ) : (
+        // this displays when loaded=false
+        <>
+          <h1>Website Loading...</h1>
+          <button type="button" onClick={handleLoaded}>
+            I'm Impatient!
+          </button>
+        </>
+      )}
+    </div>
+  );
 };
 
-export default App
-
-
-
+export default App;
 
 // if (loaded) {
 //     return (
@@ -50,5 +64,3 @@ export default App
 //     <Greeter1 name="Ervin Howell" phrase="I can't believe its not"/>)
 //     </>
 // }
-
-
